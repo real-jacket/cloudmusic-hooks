@@ -1538,7 +1538,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.4.0", "@babel/runtime@^7.5.1", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.4.0", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
   version "7.8.7"
   resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.8.7.tgz?cache=0&sync_timestamp=1583400922119&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.8.7.tgz#8fefce9802db54881ba59f90bb28719b4996324d"
   integrity sha1-j+/OmALbVIgbpZ+Quyhxm0mWMk0=
@@ -5708,7 +5708,7 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.1.0:
+hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha1-7OCsr3HWLClpwuxZ/v9CpLGoW0U=
@@ -5964,6 +5964,13 @@ imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
+
+imutable@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npm.taobao.org/imutable/download/imutable-0.0.1.tgz#bf5a512fb80e645219d4098b70a3fa5d50b140bd"
+  integrity sha1-v1pRL7gOZFIZ1AmLcKP6XVCxQL0=
+  dependencies:
+    surround-constructor "~0.0.2"
 
 indent-string@^4.0.0:
   version "4.0.0"
@@ -9481,7 +9488,7 @@ react-error-overlay@^6.0.6:
   resolved "https://registry.npm.taobao.org/react-error-overlay/download/react-error-overlay-6.0.6.tgz#ac4d9dc4c1b5c536c2c312bf66aa2b09bfa384e2"
   integrity sha1-rE2dxMG1xTbCwxK/ZqorCb+jhOI=
 
-react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0:
+react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.9.0:
   version "16.13.0"
   resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.13.0.tgz?cache=0&sync_timestamp=1583961006995&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-16.13.0.tgz#0f37c3613c34fe6b37cd7f763a0d6293ab15c527"
   integrity sha1-DzfDYTw0/ms3zX92Og1ik6sVxSc=
@@ -9490,6 +9497,17 @@ react-is@^16.8.1, react-is@^16.8.4:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
+
+react-redux@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.npm.taobao.org/react-redux/download/react-redux-7.2.0.tgz#f970f62192b3981642fec46fd0db18a074fe879d"
+  integrity sha1-+XD2IZKzmBZC/sRv0NsYoHT+h50=
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    hoist-non-react-statics "^3.3.0"
+    loose-envify "^1.4.0"
+    prop-types "^15.7.2"
+    react-is "^16.9.0"
 
 react-router-config@^5.1.1:
   version "5.1.1"
@@ -9689,6 +9707,24 @@ redent@^3.0.0:
   dependencies:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
+
+redux-immutable@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/redux-immutable/download/redux-immutable-4.0.0.tgz#3a1a32df66366462b63691f0e1dc35e472bbc9f3"
+  integrity sha1-Ohoy32Y2ZGK2NpHw4dw15HK7yfM=
+
+redux-thunk@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npm.taobao.org/redux-thunk/download/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+  integrity sha1-UcLBmhhe1Rh6qpotCLZm0NZGdiI=
+
+redux@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.npm.taobao.org/redux/download/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
+  integrity sha1-TbXeWBbheJHeioDEJCMtBvBR2T8=
+  dependencies:
+    loose-envify "^1.4.0"
+    symbol-observable "^1.2.0"
 
 regenerate-unicode-properties@^8.1.0:
   version "8.1.0"
@@ -10857,6 +10893,11 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+surround-constructor@~0.0.2:
+  version "0.0.3"
+  resolved "https://registry.npm.taobao.org/surround-constructor/download/surround-constructor-0.0.3.tgz#7323a5d1eec0529cbc7f4f7d3608d7d634ce72b7"
+  integrity sha1-cyOl0e7AUpy8f099NgjX1jTOcrc=
+
 svg-parser@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/svg-parser/-/svg-parser-2.0.2.tgz#d134cc396fa2681dc64f518330784e98bd801ec8"
@@ -10880,6 +10921,11 @@ svgo@^1.0.0, svgo@^1.2.2:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+symbol-observable@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/symbol-observable/download/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+  integrity sha1-wiaIrtTqs83C3+rLtWFmBWCgCAQ=
 
 symbol-tree@^3.2.2:
   version "3.2.4"

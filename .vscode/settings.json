@@ -1,5 +1,0 @@
-{
-    "php.suggest.basic": false,
-    "php.validate.enable": false,
-    "path-intellisense.extensionOnImport": true
-}

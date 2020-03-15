@@ -4,4 +4,4 @@ function Recommend() {
     return <div>Recommend</div>
 }
 
-export default Recommend
+export default React.memo(Recommend)

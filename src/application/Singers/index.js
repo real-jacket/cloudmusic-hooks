@@ -4,4 +4,4 @@ function Singers() {
     return <div>Singers</div>
 }
 
-export default Singers
+export default React.memo(Singers)

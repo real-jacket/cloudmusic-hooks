@@ -12,7 +12,7 @@ export default [
         routes: [
             {
                 path: '/',
-                exct: true,
+                exact: true,
                 render: () => (
                     <Redirect to={"/recommend"} />
                 )

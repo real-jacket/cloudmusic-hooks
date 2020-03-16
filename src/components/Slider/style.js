@@ -10,7 +10,8 @@ export const SlideContainer = styled.div`
 	background: white;
 	.before {
 		position: absolute;
-		height: 60%;
+		height: 400px;
+		top: -300px;
 		width: 100%;
 		background: ${style['theme-color']};
 	}
@@ -27,7 +28,7 @@ export const SlideContainer = styled.div`
 			width: 100%;
 			height: 100%;
 		}
-		.swiper-pagenation-bullet-active {
+		.swiper-pagination-bullet-active {
 			background: ${style['theme-color']};
 		}
 	}

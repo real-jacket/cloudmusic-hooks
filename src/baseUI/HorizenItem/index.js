@@ -37,21 +37,21 @@ function Horizen(props) {
   
   const Category = useRef(null)
 
-  useEffect(() => {
-    let categoryDOM = Category.current
-    let tagElems = categoryDOM.querySelectorAll("span")
-    let totalWidth = 0;
+  // useEffect(() => {
+  //   let categoryDOM = Category.current
+  //   let tagElems = categoryDOM.querySelectorAll("span")
+  //   let totalWidth = 0;
 
-    Array.from(tagElems).forEach(ele => {
-      totalWidth += ele.offsetWidth
-    })
+  //   Array.from(tagElems).forEach(ele => {
+  //     totalWidth += ele.offsetWidth
+  //   })
 
-    categoryDOM.style.width = `${totalWidth}px`
-  }, [])
+  //   categoryDOM.style.width = `${totalWidth}px`
+  // }, [])
 
 	return (
 		<Scroll direction={'horizental'}>
-      <div ref={Category}>
+      <div ref={Category} style={{width:"max-content"}}>
 				<List>
 					<span>{title}</span>
 					{list.map(item => {

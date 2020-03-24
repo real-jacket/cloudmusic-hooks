@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-const baseURL = 'http://47.98.159.95/m-api'
-
 // axios 拦截器
 const axiosInstance = axios.create({
-  baseURL
+  // baseURL: process.env.REACT_APP_BASE_API
+  baseURL:'http://47.98.159.95/m-api'
 })
 
 axiosInstance.interceptors.response.use(

@@ -1,4 +1,4 @@
-import React, { memo, useRef, useEffect } from 'react'
+import React, { memo, useRef } from 'react'
 import styled from 'styled-components'
 import { PropTypes } from 'prop-types'
 import Scroll from '../Scroll'

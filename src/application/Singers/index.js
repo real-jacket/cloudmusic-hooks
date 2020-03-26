@@ -14,6 +14,8 @@ import {
 	refreshMoreSingerList
 } from './store/actionCreators'
 import { connect } from 'react-redux'
+import LazyLoad, { forceCheck } from 'react-lazyload'
+import Loading from '../../baseUI/Loading'
 
 //mock 数据
 // const singerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(item => {
@@ -26,18 +28,30 @@ import { connect } from 'react-redux'
 // })
 
 const renderSingerList = singerList => {
+	const list = singerList ? singerList.toJS() : []
 	return (
 		<List>
-			{singerList.map((item, index) => {
+			{list.map((item, index) => {
 				return (
 					<ListItem key={item.accountId + '' + index}>
 						<div className='img_wrapper'>
-							<img
-								src={`${item.picUrl}?param=300x300`}
-								width='100%'
-								height='100%'
-								alt='music'
-							></img>
+							<LazyLoad
+								placeholder={
+									<img
+										width='100%'
+										height='100%'
+										src={require('./singer.png')}
+										alt='music'
+									></img>
+								}
+							>
+								<img
+									src={`${item.picUrl}?param=300x300`}
+									width='100%'
+									height='100%'
+									alt='music'
+								></img>
+							</LazyLoad>
 						</div>
 						<span className='name'>{item.name}</span>
 					</ListItem>
@@ -50,9 +64,17 @@ const renderSingerList = singerList => {
 function Singers(props) {
 	const [category, setCategory] = useState('')
 	const [alpha, setAlpha] = useState('')
-	const singerList  = props.singerList.toJS()
-	console.log(singerList)
-	const { updateDispatch, getHotSingerDispatch } = props
+	const {
+		singerList,
+		updateDispatch,
+		getHotSingerDispatch,
+		pullUpRefreshDispatch,
+		pullDownRefreshDispatch,
+		pageCount,
+		pullDownLoading,
+		pullUpLoading,
+		enterLoading
+	} = props
 
 	const handleUpdateAlpha = val => {
 		setAlpha(val)
@@ -68,6 +90,14 @@ function Singers(props) {
 		getHotSingerDispatch()
 		//eslint-disable-next-line
 	}, [])
+
+	const handlePullUp = () => {
+		pullUpRefreshDispatch(category, alpha, category === '', pageCount)
+	}
+
+	const handlePullDown = () => {
+		pullDownRefreshDispatch(category, alpha)
+	}
 
 	return (
 		<div>
@@ -86,8 +116,17 @@ function Singers(props) {
 				></HorizenItem>
 			</NavContainer>
 			<ListContainer>
-				<Scroll>{renderSingerList(singerList)}</Scroll>
+				<Scroll
+					pullUp={handlePullUp}
+					pullDown={handlePullDown}
+					pullUpLoading={pullUpLoading}
+					pullDownLoading={pullDownLoading}
+					onScroll={forceCheck}
+				>
+					{renderSingerList(singerList)}
+				</Scroll>
 			</ListContainer>
+			{enterLoading ? <Loading></Loading> : null}
 		</div>
 	)
 }
@@ -96,8 +135,8 @@ const mapStateToProps = state => ({
 	singerList: state.getIn(['singer', 'singerList']),
 	enterLoading: state.getIn(['singer', 'enterLoading']),
 	pullUpLoading: state.getIn(['singer', 'pullUpLoading']),
-	pullDownLoading: state.getIn(['singers', 'pullDownLoading']),
-	pageCount: state.getIn(['singers', 'pageCount'])
+	pullDownLoading: state.getIn(['singer', 'pullDownLoading']),
+	pageCount: state.getIn(['singer', 'pageCount'])
 })
 
 const mapDispatchToProps = dispatch => {

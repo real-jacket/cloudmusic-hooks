@@ -63,9 +63,9 @@ export const getHotSingerList = () => {
 
 export const refreshMoreSingerList = (cat, initial) => {
 	return (dispatch, getState) => {
-		const pageCount = getState().getIn(['singers', 'pageCount'])
+		const pageCount = getState().getIn(['singer', 'pageCount'])
 		const singerList = getState()
-			.getIn(['singers', 'singerList'])
+			.getIn(['singer', 'singerList'])
 			.toJS()
 		getSingerListRequest({cat, initial, offset:pageCount})
 			.then(res => {
@@ -81,7 +81,7 @@ export const refreshMoreSingerList = (cat, initial) => {
 
 export const refreshMoreHotSingerList = (category, alpha) => {
 	return (dispatch, getState) => {
-		const pageCount = getState().getIn(['singers', 'pageCount'])
+		const pageCount = getState().getIn(['singer', 'pageCount'])
 		const singerList = getState()
 			.getIn(['singer', 'singerList'])
 			.toJS()

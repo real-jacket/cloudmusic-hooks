@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const Content = styled.div`
-	position: fixed;
-	top: 94px;
-	bottom: 0;
-	width: 100%;
+  position: fixed;
+  top: 94px;
+  bottom: 0;
+  width: 100%;
 `

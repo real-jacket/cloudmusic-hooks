@@ -14,7 +14,7 @@ const loading = keyframes`
 const LoadingWrapper = styled.div`
   > div {
     position: fixed;
-    z-index:100;
+    z-index: 100;
     left: 0;
     right: 0;
     top: 0;
@@ -23,22 +23,22 @@ const LoadingWrapper = styled.div`
     width: 60px;
     height: 60px;
     opacity: 0.6;
-    border-radius:50%;
-    background-color:${style['theme-color']};
-    animation:${loading} 1.4s infinite ease-in; 
+    border-radius: 50%;
+    background-color: ${style['theme-color']};
+    animation: ${loading} 1.4s infinite ease-in;
   }
-  > div:nth-child(2){
+  > div:nth-child(2) {
     animation-delay: -0.7s;
   }
 `
 
 function Loading() {
-	return (
-		<LoadingWrapper>
-			<div></div>
-			<div></div>
-		</LoadingWrapper>
-	)
+  return (
+    <LoadingWrapper>
+      <div />
+      <div />
+    </LoadingWrapper>
+  )
 }
 
 export default React.memo(Loading)

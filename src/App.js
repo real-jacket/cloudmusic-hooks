@@ -8,15 +8,15 @@ import { Provider } from 'react-redux'
 import store from './store'
 
 function App() {
-	return (
-		<Provider store={store}>
-			<HashRouter>
-				<GlobalStyle></GlobalStyle>
-				<IconStyle></IconStyle>
-				{renderRoutes(routes)}
-			</HashRouter>
-		</Provider>
-	)
+  return (
+    <Provider store={store}>
+      <HashRouter>
+        <GlobalStyle />
+        <IconStyle />
+        {renderRoutes(routes)}
+      </HashRouter>
+    </Provider>
+  )
 }
 
 export default App

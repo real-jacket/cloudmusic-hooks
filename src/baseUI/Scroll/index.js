@@ -1,17 +1,10 @@
-import React, {
-  forwardRef,
-  useState,
-  useRef,
-  useEffect,
-  useImperativeHandle,
-  // useMemo
-} from 'react'
+import React, { forwardRef, useState, useRef, useEffect, useImperativeHandle, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import BScroll from 'better-scroll'
 import styled from 'styled-components'
 import Loading from '../Loading'
 import Loading2 from '../Loading-v2'
-// import { debounce } from '../../utils'
+import { debounce } from '../../utils'
 
 const ScrollContainer = styled.div`
   height: 100%;
@@ -49,13 +42,15 @@ const Scroll = forwardRef((props, ref) => {
 
   const PullDownDisplayStyle = pullDownLoading ? { display: 'block' } : { display: 'none' }
 
-  // const pullUpDebounce = useMemo(() => {
-  // 	return debounce(pullUp, 3000)
-  // }, [pullUp])
+  const pullUpDebounce = useMemo(() => {
+    return debounce(pullUp, 300, true)
+    // eslint-disable-next-line
+  }, [])
 
-  // const pullDownDebounce = useMemo(() => {
-  // 	return debounce(pullDown, 3000)
-  // }, [pullDown])
+  const pullDownDebounce = useMemo(() => {
+    return debounce(pullDown, 300, true)
+    // eslint-disable-next-line
+  }, [])
 
   // 创建better-scroll实例
   useEffect(() => {
@@ -93,14 +88,14 @@ const Scroll = forwardRef((props, ref) => {
     bScroll.on('scrollEnd', () => {
       // 判断是否滑动到了底部
       if (bScroll.y <= bScroll.maxScrollY + 100) {
-        pullUp()
+        pullUpDebounce()
       }
     })
     bScroll.on('scrollEnd', handlePullUp)
     return () => {
       bScroll.off('scrollEnd', handlePullUp)
     }
-  }, [pullUp, bScroll, handlePullUp])
+  }, [pullUp, bScroll, pullUpDebounce, handlePullUp])
 
   // 下拉刷新
   useEffect(() => {
@@ -108,14 +103,14 @@ const Scroll = forwardRef((props, ref) => {
     bScroll.on('touchEnd', (pos) => {
       // 判断用户下拉的动作
       if (pos.y > 50) {
-        pullDown()
+        pullDownDebounce()
       }
     })
     bScroll.on('touchEnd', handlePullDown)
     return () => {
       bScroll.off('touchEnd', handlePullDown)
     }
-  }, [pullDown, bScroll, handlePullDown])
+  }, [pullDown, bScroll, pullDownDebounce, handlePullDown])
 
   // 重新渲染时刷新实例，防止无法滑动
   useEffect(() => {

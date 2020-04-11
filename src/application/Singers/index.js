@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import HorizonItem from '../../baseUI/HorizenItem'
+import React, { useEffect, useContext } from 'react'
+import HorizonItem from '../../baseUI/HorizonItem'
 import { alphaTypes, categoryTypes } from '../../api/config'
 import { List, ListContainer, ListItem, NavContainer } from './style'
 import Scroll from '../../baseUI/Scroll'
@@ -16,6 +16,7 @@ import {
 import { connect } from 'react-redux'
 import LazyLoad, { forceCheck } from 'react-lazyload'
 import Loading from '../../baseUI/Loading'
+import { CategoryDataContext, CHANGE_ALPHA, CHANGE_CATEGORY } from './data'
 
 //mock 数据
 // const singerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(item => {
@@ -49,8 +50,11 @@ const renderSingerList = (singerList) => {
 }
 
 function Singers(props) {
-  const [category, setCategory] = useState('')
-  const [alpha, setAlpha] = useState('')
+  // const [category, setCategory] = useState('')
+  // const [alpha, setAlpha] = useState('')
+  const { data, dispatch } = useContext(CategoryDataContext)
+  const { category, alpha } = data.toJS()
+
   const {
     singerList,
     updateDispatch,
@@ -64,12 +68,14 @@ function Singers(props) {
   } = props
 
   const handleUpdateAlpha = (val) => {
-    setAlpha(val)
+    // setAlpha(val)
+    dispatch({ type: CHANGE_ALPHA, data: val })
     updateDispatch(category, val)
   }
 
   const handleUpdateCategory = (val) => {
-    setCategory(val)
+    // setCategory(val)
+    dispatch({ type: CHANGE_CATEGORY, data: val })
     updateDispatch(val, alpha)
   }
 

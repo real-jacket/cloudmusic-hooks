@@ -7,7 +7,7 @@ const dance = keyframes`
     transform: scaleY(0.4);
     transform-origin:center 100%;
   }
-  20% {
+  20% ,80%{
     transform: scaleY(1);
   }
 `

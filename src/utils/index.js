@@ -53,3 +53,12 @@ export const debounce = (func, wait = 50, immediate = true) => {
     }
   }
 }
+
+// 排行榜歌曲分割
+export const filterIndex = (rankList) => {
+  for (let i = 0; i < rankList.length - 1; i++) {
+    if (rankList[i].tracks.length && !rankList[i + 1].tracks.length) {
+      return i + 1
+    }
+  }
+}

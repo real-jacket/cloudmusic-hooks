@@ -16,7 +16,7 @@ const reducer = (state, action) => {
     case CHANGE_ALPHA:
       return state.set('alpha', action.data)
     default:
-      break
+      return state
   }
 }
 

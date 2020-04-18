@@ -18,7 +18,9 @@ function Rank(props) {
     //eslint-disable-next-line
   }, [])
 
-  const enterDetail = () => {}
+  const enterDetail = (detail) => {
+    props.history.push(`/rank/${detail.id}`)
+  }
 
   let globalStartIndex = filterIndex(rankList)
   let officialList = rankList.slice(0, globalStartIndex)
@@ -29,7 +31,7 @@ function Rank(props) {
       <List globalRank={global}>
         {list.map((item) => {
           return (
-            <ListItem key={item.coverImgId} tracks={item.tracks} onClick={() => enterDetail(item.name)}>
+            <ListItem key={item.coverImgId} tracks={item.tracks} onClick={() => enterDetail(item)}>
               <div className="img_wrapper">
                 <img src={item.coverImgUrl} alt=""></img>
                 <div className="decorate"></div>

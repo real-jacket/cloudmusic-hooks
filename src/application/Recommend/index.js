@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import * as actionCreators from './store/actionCreators'
 import { forceCheck } from 'react-lazyload'
 import Loading from '../../baseUI/Loading'
+import { renderRoutes } from 'react-router-config'
 
 function Recommend(props) {
   // mock数据
@@ -27,7 +28,7 @@ function Recommend(props) {
   // 	}
   // })
   const { bannerList, recommendList, enterLoading } = props
-  const { getBannerListDispatch, getRecommenListDispatch } = props
+  const { getBannerListDispatch, getRecommendListDispatch } = props
 
   useEffect(() => {
     // immutable 数据结构中的size表示长度属性
@@ -35,7 +36,7 @@ function Recommend(props) {
       getBannerListDispatch()
     }
     if (!recommendList.size) {
-      getRecommenListDispatch()
+      getRecommendListDispatch()
     }
 
     //eslint-disable-next-line
@@ -53,6 +54,7 @@ function Recommend(props) {
         </div>
       </Scroll>
       {enterLoading ? <Loading /> : null}
+      {renderRoutes(props.route.routes)}
     </Content>
   )
 }
@@ -68,7 +70,7 @@ const mapDispatchToProps = (dispatch) => {
     getBannerListDispatch() {
       dispatch(actionCreators.getBannerList())
     },
-    getRecommenListDispatch() {
+    getRecommendListDispatch() {
       dispatch(actionCreators.getRecommendList())
     },
   }

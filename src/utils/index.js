@@ -73,3 +73,6 @@ export const getName = (list) => {
 
   return str
 }
+
+// 判断是否是一个空对象
+export const isEmptyObject = (obj) => !obj || Object.keys(obj).length === 0

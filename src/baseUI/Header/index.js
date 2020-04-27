@@ -3,12 +3,13 @@ import styled from 'styled-components'
 import style from '../../assets/global-style'
 import PropTypes from 'prop-types'
 import Marquee from '../Marquee'
+import { HEADER_HEIGHT } from '../../config'
 
 const HeaderContainer = styled.div`
   position: fixed;
   padding: 5px 10px;
   padding-top: 0;
-  height: 40px;
+  height: ${HEADER_HEIGHT}px;
   width: 100%;
   z-index: 100;
   display: flex;

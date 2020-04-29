@@ -76,3 +76,33 @@ export const getName = (list) => {
 
 // 判断是否是一个空对象
 export const isEmptyObject = (obj) => !obj || Object.keys(obj).length === 0
+
+// 给css3 相关属性添加浏览器前缀，处理浏览器兼容问题
+let elementStyle = document.createElement('div').style
+
+let vendor = (() => {
+  let transformNames = {
+    webkit: 'webkitTransform',
+    Moz: 'MozTransform',
+    O: 'OTransform',
+    ms: 'msTransform',
+    standard: 'Transform',
+  }
+
+  for (const key in transformNames) {
+    if (elementStyle[transformNames[key]] !== undefined) {
+      return key
+    }
+  }
+  return false
+})()
+
+export function prefixStyle(style) {
+  if (!vendor) {
+    return false
+  }
+  if (vendor === 'standard') {
+    return style
+  }
+  return vendor + style.charAt(0).toUpperCase() + style.substr(1)
+}

@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "better-scroll": "^2.0.0-beta.6",
+    "create-keyframe-animation": "^0.1.0",
     "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",

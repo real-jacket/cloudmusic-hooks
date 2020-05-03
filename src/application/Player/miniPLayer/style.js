@@ -1,13 +1,13 @@
 import styled, { keyframes } from 'styled-components'
 import style from '../../../assets/global-style'
 
-const rotated = keyframes`
-	0%{
-		transform: rotate(0)
-	}
-	100%{
-		transform: rotate(360deg)
-	}
+const rotate = keyframes`
+  0%{
+    transform: rotate(0);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
 `
 
 export const MiniPlayerContainer = styled.div`
@@ -42,7 +42,7 @@ export const MiniPlayerContainer = styled.div`
       img {
         border-radius: 50%;
         &.play {
-          animation: ${rotated} 10s infinite;
+          animation: ${rotate} 10s infinite;
           &.pause {
             animation-play-state: paused;
           }
@@ -65,7 +65,7 @@ export const MiniPlayerContainer = styled.div`
     }
     .desc {
       font-size: ${style['font-size-s']};
-      color: ${style['font-color-desc']};
+      color: ${style['font-color-desc-v2']};
       ${style.noWrap()}
     }
   }
@@ -82,7 +82,7 @@ export const MiniPlayerContainer = styled.div`
       position: absolute;
       left: 8px;
       top: 8px;
-      & .icon-play {
+      &.icon-play {
         left: 9px;
       }
     }

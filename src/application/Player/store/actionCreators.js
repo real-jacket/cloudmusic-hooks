@@ -15,7 +15,7 @@ export const changeCurrentSong = (data) => ({
   data: fromJS(data),
 })
 
-export const changeFUllScreen = (data) => ({
+export const changeFullScreen = (data) => ({
   type: SET_FULL_SCREEN,
   data,
 })

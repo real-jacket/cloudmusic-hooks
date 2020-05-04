@@ -8,11 +8,11 @@ const CircleWrapper = styled.div`
     stroke-width: 8px;
     transform-origin: center;
     &.progress-background {
-      transform: scale (0.9);
+      transform: scale(0.9);
       stroke: ${style['theme-color-shadow']};
     }
     &.progress-bar {
-      transform: scale (0.9) rotate (-90deg);
+      transform: scale(0.9) rotate(-90deg);
       stroke: ${style['theme-color']};
     }
   }
@@ -20,9 +20,9 @@ const CircleWrapper = styled.div`
 
 function ProgressCircle(props) {
   const { radius, percent } = props
-  // 整个背景的周长
+  //整个背景的周长
   const dashArray = Math.PI * 100
-  // 没有高亮的部分，剩下高亮的就是进度
+  //没有高亮的部分，剩下高亮的就是进度
   const dashOffset = (1 - percent) * dashArray
 
   return (

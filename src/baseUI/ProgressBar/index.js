@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import style from '../../assets/global-style'
+import { prefixStyle } from '../../utils'
 
 const ProgressBarWrapper = styled.div`
   height: 30px;
@@ -35,17 +36,30 @@ const ProgressBarWrapper = styled.div`
   }
 `
 
+const transform = prefixStyle('transform')
+
 function ProgressBar(props) {
   const progressBar = useRef()
   const progress = useRef()
   const progressBtn = useRef()
   const [touch, setTouch] = useState({})
 
-  const progressBtnWidth = 16
+  // const progressBtnWidth = 16
   // 滚动条的最大长度
   // const barWidth = progressBar.current.clientWidth
 
+  const { percent } = props
   const { percentChange } = props
+
+  useEffect(() => {
+    if (percent >= 0 && percent <= 1 && !touch.initiated) {
+      const barWidth = progressBar.current.clientWidth
+      const offsetWidth = percent * barWidth
+      progress.current.style.width = `${offsetWidth}px`
+      progressBtn.current.style[transform] = `translate3d(${offsetWidth}px,0,0)`
+    }
+    //eslint-disable-next-line
+  }, [percent])
 
   const _changePercent = () => {
     const barWidth = progressBar.current.clientWidth

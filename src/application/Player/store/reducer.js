@@ -23,6 +23,8 @@ export default (state = defaultState, action) => {
       return state.set('playing', action.data)
     case actionTypes.SET_SEQUENCE_PLAYLIST:
       return state.set('sequencePlayList', action.data)
+    case actionTypes.SET_PALY_MODE:
+      return state.set('mode', action.data)
     default:
       return state
   }

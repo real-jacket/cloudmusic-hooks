@@ -4,6 +4,6 @@ import thunk from 'redux-thunk'
 
 const composeEnhancers = window._REDUX_DEVTOOLS_EXTEND_COMPOSE__ || compose
 
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
+const store = createStore(reducer, /* preloadedState, */ composeEnhancers(applyMiddleware(thunk)))
 
 export default store

@@ -9,6 +9,7 @@ import { changeEnterLoading, getAlbumList } from './store/actionCreators'
 import { connect } from 'react-redux'
 import Loading from '../../baseUI/Loading'
 import SongsList from '../../components/SongsList'
+import MusicNote from '../../baseUI/MusicNote'
 
 export const HEADER_HEIGHT = 45
 
@@ -65,7 +66,9 @@ function Album(props) {
           <img src={currentAlbum.coverImgUrl} alt="" />
           <div className="play_count">
             <i className="iconfont play">&#xe885;</i>
-            <span className="count">{Math.floor(currentAlbum.subscribedCount / 1000) / 10} 万 </span>
+            <span className="count">
+              {Math.floor(currentAlbum.subscribedCount / 1000) / 10} 万{' '}
+            </span>
           </div>
         </div>
         <div className="desc_wrapper">
@@ -104,9 +107,20 @@ function Album(props) {
     )
   }
 
+  const musicNoteRef = useRef()
+
+  const musicAnimation = (x, y) => {
+    musicNoteRef.current.startAnimation({ x, y })
+  }
+
   const renderSongList = () => {
     return (
-      <SongsList songs={currentAlbum.tracks} showCollect={true} collectCount={currentAlbum.subscribedCount}></SongsList>
+      <SongsList
+        songs={currentAlbum.tracks}
+        showCollect={true}
+        collectCount={currentAlbum.subscribedCount}
+        musicAnimation={musicAnimation}
+      ></SongsList>
     )
   }
 
@@ -131,6 +145,7 @@ function Album(props) {
           </Scroll>
         ) : null}
         {enterLoading ? <Loading></Loading> : null}
+        <MusicNote ref={musicNoteRef}></MusicNote>
       </Container>
     </CSSTransition>
   )

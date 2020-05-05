@@ -3,6 +3,7 @@
         "PULLUP",
         "hsla",
         "lazyload",
+        "transitionend",
         "unmount"
     ]
 }

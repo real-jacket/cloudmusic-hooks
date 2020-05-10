@@ -36,6 +36,7 @@ function Singers(props) {
     pullUpLoading,
     enterLoading,
   } = props
+  const { songCount } = props
 
   const handleUpdateAlpha = (val) => {
     // setAlpha(val)
@@ -77,7 +78,11 @@ function Singers(props) {
           return (
             <ListItem key={accountId + '' + index} onClick={() => enterDetail(id)}>
               <div className="img_wrapper">
-                <LazyLoad placeholder={<img width="100%" height="100%" src={require('./singer.png')} alt="music" />}>
+                <LazyLoad
+                  placeholder={
+                    <img width="100%" height="100%" src={require('./singer.png')} alt="music" />
+                  }
+                >
                   <img src={`${picUrl}?param=300x300`} width="100%" height="100%" alt="music" />
                 </LazyLoad>
               </div>
@@ -98,9 +103,14 @@ function Singers(props) {
           handleClick={handleUpdateCategory}
           oldVal={category}
         />
-        <HorizonItem list={alphaTypes} title="首字母：" handleClick={handleUpdateAlpha} oldVal={alpha} />
+        <HorizonItem
+          list={alphaTypes}
+          title="首字母："
+          handleClick={handleUpdateAlpha}
+          oldVal={alpha}
+        />
       </NavContainer>
-      <ListContainer>
+      <ListContainer play={songCount}>
         <Scroll
           pullUp={handlePullUp}
           pullDown={handlePullDown}
@@ -123,6 +133,7 @@ const mapStateToProps = (state) => ({
   pullUpLoading: state.getIn(['singer', 'pullUpLoading']),
   pullDownLoading: state.getIn(['singer', 'pullDownLoading']),
   pageCount: state.getIn(['singer', 'pageCount']),
+  songCount: state.getIn(['player', 'playList']).size,
 })
 
 const mapDispatchToProps = (dispatch) => {

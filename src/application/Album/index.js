@@ -23,6 +23,7 @@ function Album(props) {
   const { id } = props.match.params
   const { currentAlbum: currentAlbumImmutable, enterLoading } = props
   const { getAlbumDataDispatch } = props
+  const { songCount } = props
 
   useEffect(() => {
     getAlbumDataDispatch(id)
@@ -133,7 +134,7 @@ function Album(props) {
       unmountOnExit
       onExited={props.history.goBack}
     >
-      <Container>
+      <Container play={songCount}>
         <Header title={title} handleClick={handleBack} ref={headRef} isMarquee={isMarquee}></Header>
         {!isEmptyObject(currentAlbum) ? (
           <Scroll bounceTop={false} onScroll={handleScroll}>
@@ -154,6 +155,7 @@ function Album(props) {
 const mapStateToProps = (state) => ({
   currentAlbum: state.getIn(['album', 'currentAlbum']),
   enterLoading: state.getIn(['album', 'enterLoading']),
+  songCount: state.getIn(['player', 'playList']).size,
 })
 
 const mapDispatchToProps = (dispatch) => {

@@ -21,6 +21,7 @@ function Player(props) {
   let percent = isNaN(currentTime / duration) ? 0 : currentTime / duration
 
   const audioRef = useRef()
+  const songReady = useRef(true)
 
   const {
     fullScreen,
@@ -50,15 +51,20 @@ function Player(props) {
       !playList.length ||
       currentIndex === -1 ||
       !playList[currentIndex] ||
-      playList[currentIndex].id === preSong.id
+      playList[currentIndex].id === preSong.id ||
+      !songReady.current
     )
       return
     let current = playList[currentIndex]
-    changeCurrentDispatch(current)
     setPreSong(current)
+    songReady.current = false // 标志为false 视为 新的资源还没加载完，不能切歌
+    changeCurrentDispatch(current)
     audioRef.current.src = getSongUrl(current.id)
     setTimeout(() => {
-      audioRef.current.play()
+      // play 方法返回的是一个promise 对象
+      audioRef.current.play().then(() => {
+        songReady.current = true
+      })
     })
     togglePlayingDispatch(true)
     setCurrentTime(0)
@@ -127,6 +133,11 @@ function Player(props) {
     }
   }
 
+  const handleError = () => {
+    songReady.current = true
+    alert('播放出错')
+  }
+
   const [modeText, setModeText] = useState('')
 
   const toastRef = useRef()
@@ -193,7 +204,12 @@ function Player(props) {
           handleNext={handleNext}
         ></NormalPlayer>
       )}
-      <audio ref={audioRef} onTimeUpdate={updateTime} onEnded={handleEnd}></audio>
+      <audio
+        ref={audioRef}
+        onTimeUpdate={updateTime}
+        onEnded={handleEnd}
+        onError={handleError}
+      ></audio>
       <Toast text={modeText} ref={toastRef}></Toast>
     </div>
   )

@@ -29,6 +29,7 @@ function Recommend(props) {
   // })
   const { bannerList, recommendList, enterLoading } = props
   const { getBannerListDispatch, getRecommendListDispatch } = props
+  const { songCount } = props
 
   useEffect(() => {
     // immutable 数据结构中的size表示长度属性
@@ -46,7 +47,7 @@ function Recommend(props) {
   const recommendListJS = recommendList ? recommendList.toJS() : []
 
   return (
-    <Content>
+    <Content play={songCount}>
       <Scroll className="list" onScroll={forceCheck}>
         <div>
           <Slider bannerList={bannerListJS} />
@@ -63,6 +64,7 @@ const mapStateToProps = (state) => ({
   bannerList: state.getIn(['recommend', 'bannerList']),
   recommendList: state.getIn(['recommend', 'recommendList']),
   enterLoading: state.getIn(['recommend', 'enterLoading']),
+  songCount: state.getIn(['player', 'playList']).size,
 })
 
 const mapDispatchToProps = (dispatch) => {

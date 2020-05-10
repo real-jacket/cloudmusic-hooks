@@ -10,6 +10,7 @@ import Loading from '../../baseUI/Loading'
 function Rank(props) {
   const { rankList: list, loading } = props
   const { getRankListDispatch } = props
+  const { songCount } = props
 
   const rankList = list ? list.toJS() : []
 
@@ -62,7 +63,7 @@ function Rank(props) {
   let displayStyle = loading ? { display: 'none' } : { display: '' }
 
   return (
-    <Container>
+    <Container play={songCount}>
       <Scroll>
         <div>
           <h1 className="official" style={displayStyle}>
@@ -84,6 +85,7 @@ function Rank(props) {
 const mapStateToProps = (state) => ({
   rankList: state.getIn(['rank', 'rankList']),
   loading: state.getIn(['rank', 'loading']),
+  songCount: state.getIn(['player', 'playList']).size,
 })
 
 const mapDispatchToProps = (dispatch) => {

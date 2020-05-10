@@ -11,6 +11,7 @@ import {
 import { connect } from 'react-redux'
 import MiniPLayer from './miniPLayer'
 import NormalPlayer from './normalPlayer'
+import PlayList from './playList'
 import { getSongUrl, isEmptyObject, shuffle, findIndex } from '../../utils'
 import Toast from '../../baseUI/Toast'
 import { playMode } from '../../config'
@@ -44,6 +45,7 @@ function Player(props) {
     changeCurrentDispatch,
     changePlayListDispatch,
     changeModeDispatch,
+    togglePlayListDispatch,
   } = props
 
   useEffect(() => {
@@ -185,6 +187,7 @@ function Player(props) {
           fullScreen={fullScreen}
           clickPlaying={clickPlaying}
           toggleFullScreen={toggleFullScreenDispatch}
+          togglePlayList={togglePlayListDispatch}
         ></MiniPLayer>
       )}
       {isEmptyObject(currentSong) ? null : (
@@ -202,6 +205,7 @@ function Player(props) {
           onProgressChange={onProgressChange}
           handlePre={handlePre}
           handleNext={handleNext}
+          togglePlayList={togglePlayListDispatch}
         ></NormalPlayer>
       )}
       <audio
@@ -211,6 +215,7 @@ function Player(props) {
         onError={handleError}
       ></audio>
       <Toast text={modeText} ref={toastRef}></Toast>
+      <PlayList></PlayList>
     </div>
   )
 }

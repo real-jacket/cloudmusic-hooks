@@ -36,7 +36,7 @@ const Scroll = forwardRef((props, ref) => {
   const [bScroll, setBScroll] = useState()
   const scrollContainerRef = useRef()
   const { direction, click, refresh, bounceTop, bounceBottom } = props
-  const { pullUp, pullDown, onScroll, pullUpLoading, pullDownLoading, handlePullDown, handlePullUp } = props
+  const { pullUp, pullDown, onScroll, pullUpLoading, pullDownLoading } = props
 
   const PullUpDisplayStyle = pullUpLoading ? { display: 'block' } : { display: 'none' }
 
@@ -62,7 +62,7 @@ const Scroll = forwardRef((props, ref) => {
       bounce: {
         top: bounceTop,
         bottom: bounceBottom,
-      },
+      }
     })
     setBScroll(scroll)
     return () => {
@@ -74,43 +74,41 @@ const Scroll = forwardRef((props, ref) => {
   // 绑定scroll事件
   useEffect(() => {
     if (!bScroll || !onScroll) return
-    bScroll.on('scroll', (scroll) => {
-      onScroll(scroll)
-    })
+    bScroll.on('scroll',onScroll)
     return () => {
-      bScroll.off('scroll')
+      bScroll.off('scroll',onScroll)
     }
   }, [onScroll, bScroll])
 
   // 上拉刷新
   useEffect(() => {
     if (!bScroll || !pullUp) return
-    bScroll.on('scrollEnd', () => {
+    const handlePullUp = () => {
       // 判断是否滑动到了底部
       if (bScroll.y <= bScroll.maxScrollY + 100) {
         pullUpDebounce()
       }
-    })
+    }
     bScroll.on('scrollEnd', handlePullUp)
     return () => {
       bScroll.off('scrollEnd', handlePullUp)
     }
-  }, [pullUp, bScroll, pullUpDebounce, handlePullUp])
+  }, [pullUp, bScroll, pullUpDebounce])
 
   // 下拉刷新
   useEffect(() => {
     if (!bScroll || !pullDown) return
-    bScroll.on('touchEnd', (pos) => {
+    const handlePullDown =  (pos) => {
       // 判断用户下拉的动作
       if (pos.y > 50) {
         pullDownDebounce()
       }
-    })
+    }
     bScroll.on('touchEnd', handlePullDown)
     return () => {
       bScroll.off('touchEnd', handlePullDown)
     }
-  }, [pullDown, bScroll, pullDownDebounce, handlePullDown])
+  }, [pullDown, bScroll, pullDownDebounce])
 
   // 重新渲染时刷新实例，防止无法滑动
   useEffect(() => {
@@ -133,8 +131,7 @@ const Scroll = forwardRef((props, ref) => {
           return bScroll
         }
       },
-    }),
-    [bScroll],
+    })
   )
 
   return (

@@ -15,14 +15,19 @@ import PlayList from './playList'
 import { getSongUrl, isEmptyObject, shuffle, findIndex } from '../../utils'
 import Toast from '../../baseUI/Toast'
 import { playMode } from '../../config'
+import { getLyricRequest } from '../../api/player'
+import Lyric from '../../utils/lyric-parser'
 
 function Player(props) {
   const [currentTime, setCurrentTime] = useState(0)
+
   const [duration, setDuration] = useState(0)
   let percent = isNaN(currentTime / duration) ? 0 : currentTime / duration
 
   const audioRef = useRef()
   const songReady = useRef(true)
+  const currentLyric = useRef()
+  const currentLineNum = useRef(0)
 
   const {
     fullScreen,
@@ -69,10 +74,44 @@ function Player(props) {
       })
     })
     togglePlayingDispatch(true)
+    getLyric(current.id)
     setCurrentTime(0)
     setDuration((current.dt / 1000) | 0)
     //eslint-disable-next-line
   }, [currentIndex, playList])
+
+  const [currentPlayingLyric, setCurrentPlayingLyric] = useState('')
+  const [playingLyric, setPlayingLyric] = useState('')
+
+  const handleLyric = ({ lineNum, txt }) => {
+    if (!currentLyric.current) return
+    currentLineNum.current = lineNum
+    setPlayingLyric(txt)
+    setCurrentPlayingLyric(txt)
+  }
+
+  const getLyric = (id) => {
+    let lyric = ''
+    if (currentLyric.current) {
+      currentLyric.current.stop()
+    }
+    getLyricRequest(id)
+      .then((data) => {
+        lyric = data.lrc.lyric
+        if (!lyric) {
+          currentLyric.current = null
+          return
+        }
+        currentLyric.current = new Lyric(lyric, handleLyric)
+        currentLyric.current.play()
+        currentLineNum.current = 0
+        currentLyric.current.seek(0)
+      })
+      .catch(() => {
+        songReady.current = true
+        audioRef.current.play()
+      })
+  }
 
   useEffect(() => {
     playing ? audioRef.current.play() : audioRef.current.pause()
@@ -81,6 +120,9 @@ function Player(props) {
   const clickPlaying = (e, state) => {
     e.stopPropagation()
     togglePlayingDispatch(state)
+    if (currentLyric.current) {
+      currentLyric.current.togglePlay(currentTime * 1000)
+    }
   }
 
   const updateTime = (e) => {
@@ -93,6 +135,9 @@ function Player(props) {
     audioRef.current.currentTime = newTime
     if (!playing) {
       togglePlayingDispatch(true)
+    }
+    if (currentLyric.current) {
+      currentLyric.current.seek(newTime * 1000)
     }
   }
 
@@ -206,6 +251,9 @@ function Player(props) {
           handlePre={handlePre}
           handleNext={handleNext}
           togglePlayList={togglePlayListDispatch}
+          currentLyric={currentLyric.current}
+          currentPlayingLyric={currentPlayingLyric}
+          currentLineNum={currentLineNum.current}
         ></NormalPlayer>
       )}
       <audio

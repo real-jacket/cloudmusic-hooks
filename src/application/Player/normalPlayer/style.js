@@ -103,6 +103,22 @@ export const Middle = styled.div`
   white-space: nowrap;
   font-size: 0;
   overflow: hidden;
+  .fade-enter {
+    opacity: 0;
+  }
+  .fade-enter-active {
+    opacity: 1;
+    transition: all 0.4s;
+  }
+  .fade-enter-done {
+    transition: none;
+  }
+  .fade-exit-active {
+    opacity: 0;
+  }
+  .fade-exit-done {
+    opacity: 0;
+  }
 `
 
 export const CDWrapper = styled.div`
@@ -204,5 +220,35 @@ export const Operators = styled.div`
   }
   .icon-favorite {
     color: ${style['theme-color']};
+  }
+`
+
+export const LyricContainer = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+`
+
+export const LyricWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  p {
+    line-height: 32px;
+    color: rgba(225, 255, 255, 0.5);
+    white-space: normal;
+    font-size: ${style['font-size-l']};
+    &.current {
+      color: #fff;
+    }
+    &.pure {
+      position: relative;
+      top: 30vh;
+    }
   }
 `

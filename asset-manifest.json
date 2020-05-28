@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.js": "/cloudmusic-hooks/static/js/main.0624f79d.chunk.js",
+    "main.js.map": "/cloudmusic-hooks/static/js/main.0624f79d.chunk.js.map",
+    "runtime-main.js": "/cloudmusic-hooks/static/js/runtime-main.96d9038c.js",
+    "runtime-main.js.map": "/cloudmusic-hooks/static/js/runtime-main.96d9038c.js.map",
+    "static/css/2.0988ea1f.chunk.css": "/cloudmusic-hooks/static/css/2.0988ea1f.chunk.css",
+    "static/js/2.a6c31c18.chunk.js": "/cloudmusic-hooks/static/js/2.a6c31c18.chunk.js",
+    "static/js/2.a6c31c18.chunk.js.map": "/cloudmusic-hooks/static/js/2.a6c31c18.chunk.js.map",
+    "index.html": "/cloudmusic-hooks/index.html",
+    "precache-manifest.a2f59d7644dd1ddd2e93d88dfd56ef25.js": "/cloudmusic-hooks/precache-manifest.a2f59d7644dd1ddd2e93d88dfd56ef25.js",
+    "service-worker.js": "/cloudmusic-hooks/service-worker.js",
+    "static/css/2.0988ea1f.chunk.css.map": "/cloudmusic-hooks/static/css/2.0988ea1f.chunk.css.map",
+    "static/js/2.a6c31c18.chunk.js.LICENSE.txt": "/cloudmusic-hooks/static/js/2.a6c31c18.chunk.js.LICENSE.txt",
+    "static/media/music.png": "/cloudmusic-hooks/static/media/music.64444b39.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.96d9038c.js",
+    "static/css/2.0988ea1f.chunk.css",
+    "static/js/2.a6c31c18.chunk.js",
+    "static/js/main.0624f79d.chunk.js"
+  ]
+}

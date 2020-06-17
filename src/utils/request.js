@@ -3,7 +3,7 @@ import axios from 'axios';
 // axios 拦截器
 const axiosInstance = axios.create({
   // baseURL: process.env.REACT_APP_BASE_API
-  baseURL:'http://47.98.159.95/m-api'
+  baseURL:'http://localhost:3000'
 })
 
 axiosInstance.interceptors.response.use(

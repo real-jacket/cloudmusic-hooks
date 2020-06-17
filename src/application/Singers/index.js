@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useCallback } from 'react'
 import HorizonItem from '../../baseUI/HorizonItem'
 import { alphaTypes, categoryTypes } from '../../api/config'
 import { List, ListContainer, ListItem, NavContainer } from './style'
@@ -57,13 +57,17 @@ function Singers(props) {
     //eslint-disable-next-line
   }, [])
 
-  const handlePullUp = () => {
-    pullUpRefreshDispatch(category, alpha, category === '', pageCount)
-  }
+  const handlePullUp = useCallback(
+    () => pullUpRefreshDispatch(category, alpha, category === '', pageCount),
+    //eslint-disable-next-line
+    [alpha, category, pageCount],
+  )
 
-  const handlePullDown = () => {
-    pullDownRefreshDispatch(category, alpha)
-  }
+  const handlePullDown = useCallback(
+    () => pullDownRefreshDispatch(category, alpha),
+    //eslint-disable-next-line
+    [alpha, category],
+  )
 
   const enterDetail = (id) => {
     props.history.push(`/singers/${id}`)
@@ -147,6 +151,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getSingerList(category, alpha))
     },
     pullUpRefreshDispatch(category, alpha, hot, count) {
+      console.log(category, alpha, hot, count)
       dispatch(changePullUpLoading(true))
       dispatch(changePageCount(count + 1))
       if (hot) {

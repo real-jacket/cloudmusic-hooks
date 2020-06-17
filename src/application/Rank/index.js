@@ -30,9 +30,9 @@ function Rank(props) {
   const renderRankList = (list, global) => {
     return (
       <List globalRank={global}>
-        {list.map((item) => {
+        {list.map((item,index) => {
           return (
-            <ListItem key={item.coverImgId} tracks={item.tracks} onClick={() => enterDetail(item)}>
+            <ListItem key={item.coverImgId + index} tracks={item.tracks} onClick={() => enterDetail(item)}>
               <div className="img_wrapper">
                 <img src={item.coverImgUrl} alt=""></img>
                 <div className="decorate"></div>
@@ -51,7 +51,7 @@ function Rank(props) {
       <SongList>
         {list.map((item, index) => {
           return (
-            <li key={index}>
+            <li key={index + item.first + item.second}>
               {index + 1}.{item.first} - {item.second}
             </li>
           )

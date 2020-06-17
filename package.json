@@ -26,11 +26,14 @@
     "styled-components": "^5.0.1",
     "swiper": "^5.3.6"
   },
+  "homepage": "https://real-jacket.github.io/cloudmusic-hooks",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^2.2.0",
     "http-proxy-middleware": "^1.0.3",
     "prettier": "2.0.2"
   }

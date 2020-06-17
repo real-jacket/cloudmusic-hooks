@@ -30,7 +30,7 @@ export const changePullDownLoading = (data) => ({
 // 第一次加载对应类别的歌手
 export const getSingerList = (cat, initial) => {
   return (dispatch, getState) => {
-    getSingerListRequest({ cat, initial, offset: 0 })
+    getSingerListRequest({ type: +cat[0] || -1, area: +cat.slice(1) || -1, initial, offset: 0 })
       .then((res) => {
         const data = res.artists
         dispatch(changeSingerList(data))
@@ -62,7 +62,7 @@ export const refreshMoreSingerList = (cat, initial) => {
   return (dispatch, getState) => {
     const pageCount = getState().getIn(['singer', 'pageCount'])
     const singerList = getState().getIn(['singer', 'singerList']).toJS()
-    getSingerListRequest({ cat, initial, offset: pageCount })
+    getSingerListRequest({ type: +cat[0] || -1, area: +cat.slice(1) || -1, initial, offset: pageCount })
       .then((res) => {
         const data = [...singerList, ...res.artists]
         dispatch(changeSingerList(data))

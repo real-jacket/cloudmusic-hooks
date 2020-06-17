@@ -44,13 +44,11 @@ const Scroll = forwardRef((props, ref) => {
 
   const pullUpDebounce = useMemo(() => {
     return debounce(pullUp, 300, true)
-    // eslint-disable-next-line
-  }, [])
+  }, [pullUp])
 
   const pullDownDebounce = useMemo(() => {
     return debounce(pullDown, 300, true)
-    // eslint-disable-next-line
-  }, [])
+  }, [pullDown])
 
   // 创建better-scroll实例
   useEffect(() => {
@@ -58,6 +56,7 @@ const Scroll = forwardRef((props, ref) => {
       scrollX: direction === 'horizontal',
       scrollY: direction === 'vertical',
       probeType: 3,
+      useTransition: false,
       click,
       bounce: {
         top: bounceTop,

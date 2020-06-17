@@ -5,5 +5,7 @@
         "lazyload",
         "transitionend",
         "unmount"
-    ]
+    ],
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {}
 }

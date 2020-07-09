@@ -26,7 +26,6 @@
     "styled-components": "^5.0.1",
     "swiper": "^5.3.6"
   },
-  "homepage": "https://real-jacket.github.io/cloudmusic-hooks",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

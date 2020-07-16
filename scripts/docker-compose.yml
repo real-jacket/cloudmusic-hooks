@@ -1,0 +1,19 @@
+version: "3.7"
+
+networks:
+  music:
+    driver: bridge
+
+services:
+  react-music:
+    image: "xiaomu1993/cloud-music:latest"
+    networks:
+      - music
+    ports:
+      - "8080:80"
+  node-music:
+    image: "binaryify/netease_cloud_music_api:latest"
+    networks:
+      - music
+    ports:
+      - "3000:3000"

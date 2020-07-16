@@ -1,13 +1,13 @@
-FROM node
+FROM node AS builder
 
-WORKDIR /
+WORKDIR /app/cloudMusic
 
-ADD . /
+COPY . .
 
 RUN npm install && npm run build
 
 FROM nginx
 
-COPY /build/ /usr/share/nginx/html/
+COPY --from=builder /app/cloudMusic/build/ /usr/share/nginx/html/
 
 COPY /nginx/default.conf /etc/nginx/conf.d/default.conf

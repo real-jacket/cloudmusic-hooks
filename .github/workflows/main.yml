@@ -12,8 +12,11 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout code and build
         uses: actions/checkout@v2
+        run: |
+          npm install
+          REACT_APP_BASE_API=${{ secrets.SERVER_API }} npm run build
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
@@ -21,10 +24,8 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: ${{ secrets.DOCKER_USER }}/cloud-music
-          build_args: SERVER_API=${{secrets.SERVER_API}}
           tag_with_ref: true
           tag_with_sha: true
-          tags: latest
       # - uses: actions/checkout@v1
       # - name: Docker Login
       #   run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
@@ -50,8 +51,8 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "scripts"
-          target: "$HOME/code/"
+          source: 'scripts'
+          target: '$HOME/code/'
       # - name: Copy scripts to ssh
       #   run: |
       #     ls

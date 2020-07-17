@@ -34,7 +34,7 @@ jobs:
       - name: Copy scripts to ssh
         run: |
           ls
-          scp -i ${{ secrets.SERVER_SSH_KEY }} -r ./scripts  ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{secrets.EMOTE_TARGET}}
+          scp -i ${{ secrets.SERVER_SSH_KEY }} -r /scripts  ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}::${{secrets.EMOTE_TARGET}}
       - name: Executing remote ssh commands
         uses: appleboy/ssh-action@master
         with:

@@ -21,7 +21,7 @@ jobs:
         run: |
           docker tag cloud-music ${{ secrets.DOCKER_USER }}/cloud-music:${{ github.sha }}
           docker tag cloud-music ${{ secrets.DOCKER_USER }}/cloud-music:latest
-      - name: push
+      - name: Push
         run: |
           docker push ${{ secrets.DOCKER_USER }}/cloud-music:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USER }}/cloud-music:latest
@@ -31,13 +31,16 @@ jobs:
     needs: ci
     steps:
       - uses: actions/checkout@v1
-      - name: ssh-login
-      - uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
-            whoami
-            ls -al
+      - name: Login by ssh
+        uses: easingthemes/ssh-deploy@v2.0.7
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rltgoDzvO"
+          SOURCE: "scripts/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+      - name: Execute deploy action
+        run: |
+          cd $HOME/code/scripts
+          ./start.sh

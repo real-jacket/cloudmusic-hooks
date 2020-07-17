@@ -30,8 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: ci
     steps:
+      - uses: actions/checkout@v1
       - name: Copy scripts to ssh
-        uses: actions/checkout@v1
         run: scp -i {{ secrets.SERVER_SSH_KEY }} -r ./scripts  {{ secrets.REMOTE_USER }}@{{ secrets.REMOTE_HOST }}:/root/code/
       - name: Executing remote ssh commands
         uses: appleboy/ssh-action@master

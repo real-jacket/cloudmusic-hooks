@@ -21,6 +21,7 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: ${{ secrets.DOCKER_USER }}/cloud-music
+          build_args: SERVER_API=${{secrets.SERVER_API}}
           tag_with_ref: true
           tag_with_sha: true
           tags: latest

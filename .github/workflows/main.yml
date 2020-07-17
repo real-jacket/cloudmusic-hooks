@@ -12,8 +12,9 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code and build
+      - name: Checkout code
         uses: actions/checkout@v2
+      - name: React app build
         run: |
           npm install
           REACT_APP_BASE_API=${{ secrets.SERVER_API }} npm run build

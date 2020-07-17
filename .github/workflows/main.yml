@@ -17,7 +17,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build
         run: |
-          export SERVER_API={{ SERVER_API }} 
+          export SERVER_API={{ secrets.SERVER_API }} 
           docker build --build-arg SERVER_API -t cloud-music .
       - name: Tags
         run: |

@@ -31,10 +31,18 @@ jobs:
     needs: ci
     steps:
       - uses: actions/checkout@v1
-      - name: Copy scripts to ssh
-        run: |
-          ls
-          scp -i ${{ secrets.SERVER_SSH_KEY }} -r /scripts  ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}::${{secrets.EMOTE_TARGET}}
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "scripts"
+          target: "$HOME/code/"
+      # - name: Copy scripts to ssh
+      #   run: |
+      #     ls
+      #     scp -i ${{ secrets.SERVER_SSH_KEY }} -r scripts  ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}::${{secrets.EMOTE_TARGET}}
       - name: Executing remote ssh commands
         uses: appleboy/ssh-action@master
         with:

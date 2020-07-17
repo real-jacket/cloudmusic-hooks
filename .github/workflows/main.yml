@@ -16,7 +16,7 @@ jobs:
       - name: Docker Login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build
-        run: docker build -t cloud-music .
+        run: docker build -t cloud-music --build-arg SERVER_API={{ SERVER_API }}  .
       - name: Tags
         run: |
           docker tag cloud-music ${{ secrets.DOCKER_USER }}/cloud-music:${{ github.sha }}
@@ -30,17 +30,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: ci
     steps:
-      - uses: actions/checkout@v1
-      - name: Login by ssh
-        uses: easingthemes/ssh-deploy@v2.0.7
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO"
-          SOURCE: "scripts/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-      - name: Execute deploy action
-        run: |
-          cd $HOME/code/scripts
-          ./start.sh
+      - name: Copy scripts to ssh
+        uses: actions/checkout@v1
+        run: scp -i {{ secrets.SERVER_SSH_KEY }} -r ./scripts  {{ secrets.REMOTE_USER }}@{{ secrets.REMOTE_HOST }}:/root/code/
+      - name: Executing remote ssh commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd $HOME/code/scripts
+            ./start.sh

@@ -4,7 +4,7 @@ WORKDIR /app/cloudMusic
 
 COPY . .
 
-RUN npm install && set REACT_APP_BASE_API=$ERVER_API && npm run build
+RUN npm install && set REACT_APP_BASE_API=$SERVER_API && npm run build
 
 FROM nginx
 

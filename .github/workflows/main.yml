@@ -54,8 +54,8 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "deploy_sh"
-          target: "$HOME/code/"
+          source: "docker-compose.yml"
+          target: "$HOME/code/music/"
       # - name: Copy scripts to ssh
       #   run: |
       #     ls
@@ -67,5 +67,7 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd $HOME/code/deploy_sh
-            ./start.sh
+            cd $HOME/code/music/
+            docker pull xiaomu1993/cloud-music:latest
+            docker pull binaryify/netease_cloud_music_api:latest
+            docker-compose -f docker-compose.yml up -d --force-recreate

@@ -1,7 +1,9 @@
 import axios from 'axios'
 
 const baseURL =
-  process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BASE_API : 'http://localhost:3000'
+  process.env.NODE_ENV === 'production'
+    ? process.env.REACT_APP_BASE_API
+    : 'http://localhost:3000/m-api'
 
 // axios 拦截器
 const axiosInstance = axios.create({ baseURL })

@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 
 networks:
   music:
@@ -11,9 +11,9 @@ services:
       - music
     ports:
       - "8080:80"
-  node-music:
-    image: "binaryify/netease_cloud_music_api:latest"
-    networks:
-      - music
-    ports:
-      - "3000:3000"
+  # node-music:
+  #   image: "binaryify/netease_cloud_music_api:latest"
+  #   networks:
+  #     - music
+  #   ports:
+  #     - "3000:3000"

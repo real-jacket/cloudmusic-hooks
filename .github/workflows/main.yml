@@ -60,14 +60,14 @@ jobs:
       #   run: |
       #     ls
       #     scp -i ${{ secrets.SERVER_SSH_KEY }} -r scripts  ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}::${{secrets.EMOTE_TARGET}}
-      - name: Executing remote ssh commands
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd $HOME/code/music/
-            docker pull xiaomu1993/cloud-music:latest
-            docker pull binaryify/netease_cloud_music_api:latest
-            docker-compose -f docker-compose.yml up -d --force-recreate
+      # - name: Executing remote ssh commands
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.REMOTE_HOST }}
+      #     username: ${{ secrets.REMOTE_USER }}
+      #     key: ${{ secrets.SERVER_SSH_KEY }}
+      #     script: |
+      #       cd $HOME/code/music/
+      #       docker pull xiaomu1993/cloud-music:latest
+      #       docker pull binaryify/netease_cloud_music_api:latest
+      #       docker-compose -f docker-compose.yml up -d --force-recreate

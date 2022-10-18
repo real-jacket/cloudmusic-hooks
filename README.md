@@ -1,5 +1,7 @@
 # 网易云音乐移动端 React + hooks
 
+[![CloudMusic CI/CD](https://github.com/real-jacket/cloudmusic-hooks/actions/workflows/main.yml/badge.svg)](https://github.com/real-jacket/cloudmusic-hooks/actions/workflows/main.yml)
+
 一个基于 React 技术栈开发的网易云音乐移动端，使用技术栈为 react + hooks + redux + react-router + immutable + axios 等，借用开源的 网易云 api 开发而成。
 
 ## 开发文档
